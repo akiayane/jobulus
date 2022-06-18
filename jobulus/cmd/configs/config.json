@@ -1,0 +1,16 @@
+{
+    "port" : 4000,
+    "env" : "development",
+    "db" : {
+        "dsn":"username:password@tcp(your.database.ip.address:port)/databasename?parseTime=true&loc=Asia%2FAlmaty",
+        "MaxOpenConns":25,
+        "MaxIdleConns":25,
+        "MaxIdleTime":"15m"
+    },
+    "limiter":{
+        "rps":2,
+        "burst":4,
+        "enabled":true
+    },
+    "token"  : "your_discord_bot_token"
+}
