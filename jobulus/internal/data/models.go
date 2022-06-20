@@ -9,8 +9,11 @@ type Healthcheck struct {
 }
 
 type Models struct {
+	Offer OfferModel
 }
 
 func NewModes(db *sql.DB) Models {
-	return Models{}
+	return Models{
+		OfferModel{DB: db},
+	}
 }

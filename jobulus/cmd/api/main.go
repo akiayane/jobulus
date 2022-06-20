@@ -104,7 +104,11 @@ func serveDiscordBot(cfg *config, app *application) {
 		return
 	}
 
-	jobulus := bot.Start()
+	jobulus, err := bot.Start()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 
 	for {
 		offer := <-app.offers

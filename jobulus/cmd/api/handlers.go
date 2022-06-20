@@ -31,8 +31,28 @@ func (app *application) RegisterOffer(c *gin.Context) {
 
 	input.CreatedTime = time.Now()
 
-	app.offers <- input
+	go func() {
+		app.offers <- input
+	}()
+
+	_, err := app.models.Offer.Insert(input.Title, input.Description, input.Salary, input.Contacts, input.Schedule, input.EmploymentType)
+	if err != nil {
+		app.serverErrorResponse(err, c)
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"payload": "sent successfully"})
+
+}
+
+func (app *application) GetAllOffers(c *gin.Context) {
+
+	offers, err := app.models.Offer.GetAll()
+	if err != nil {
+		app.serverErrorResponse(err, c)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"payload": offers})
 
 }

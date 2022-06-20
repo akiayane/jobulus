@@ -32,6 +32,7 @@ func (app *application) routes() http.Handler {
 	)
 	router.GET("/health", app.Healthcheck)
 	router.POST("/createoffer", app.RegisterOffer)
+	router.GET("/offer", app.GetAllOffers)
 
 	return router
 }
